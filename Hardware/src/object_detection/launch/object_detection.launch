@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="object_detection_name" default="webcamAi"/>
+    <arg name="track_object_name" default="track_sign"/>
+    <arg name="handle_object_name" default="handle_sign"/>
+    <arg name="webcam" default="false"/>
+    <arg name="launch_sim" default="false"/>
+    <arg name="simulate_sign" default="false"/>
+    <arg name="line_following" default="true"/>
+    <arg name="handle_sign" default="true"/>
+    <arg name="show_images" default="True"/>
+    
+    
+    
+    
+
+    <group unless="$(arg line_following)">
+        <group if="$(arg launch_sim)">
+
+            <include file="$(find puzzlebot_world)/launch/puzzlebot_simple_world.launch">
+            </include>
+        
+        </group>
+    </group>
+
+    <group if="$(arg line_following)">
+        <include file="$(find line_detector)/launch/line_follower.launch">
+            <arg name="launch_sim" value="$(arg launch_sim)"/>
+            <arg name="show_images" value="$(arg show_images)"/>
+        </include>
+        
+    </group>
+
+    <group if="$(arg handle_sign)">
+        <node pkg="object_detection" type="track_object.py" name="$(arg track_object_name)">
+            
+        </node>
+	<node pkg="object_detection" type="handle_object.py" name="$(arg handle_object_name)">
+            
+        </node>
+        
+    </group>
+
+    <group if="$(arg webcam)">
+        <node pkg="object_detection" type="detect_object_computer.py" name="$(arg object_detection_name)">
+            
+        </node>
+    </group>
+
+    <group unless="$(arg webcam)">
+        <group if="$(arg simulate_sign)">
+
+            <node pkg="object_detection" type="simulate_detecting_object.py" name="simulate_detecting_object">
+                
+            </node>  
+            
+        </group>
+    </group>
+
+</launch>
