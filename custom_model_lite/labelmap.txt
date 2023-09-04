@@ -1,0 +1,7 @@
+stop
+go_straight
+round_about
+turn_right
+construction_ahead
+turn_left
+give_way

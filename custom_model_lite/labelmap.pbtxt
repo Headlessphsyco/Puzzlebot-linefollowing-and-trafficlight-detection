@@ -1,0 +1,35 @@
+item {
+  id: 1
+  name: 'stop'
+}
+
+item {
+  id: 2
+  name: 'go_straight'
+}
+
+item {
+  id: 3
+  name: 'round_about'
+}
+
+item {
+  id: 4
+  name: 'turn_right'
+}
+
+item {
+  id: 5
+  name: 'construction_ahead'
+}
+
+item {
+  id: 6
+  name: 'turn_left'
+}
+
+item {
+  id: 7
+  name: 'give_way'
+}
+
