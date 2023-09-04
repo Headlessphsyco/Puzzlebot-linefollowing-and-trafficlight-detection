@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="detecting_name" default="line_detecting"/>
+    <arg name="following_name" default="line_following"/>
+    <arg name="launch_sim" default="true"/>
+    <arg name="show_images" default="True"/>
+    
+
+    <param name="/show_images" value="$(arg show_images)"/>
+    
+    <group if="$(arg launch_sim)">
+
+        <include file="$(find puzzlebot_world)/launch/puzzlebot_simple_world.launch">
+        </include>
+    
+    </group>
+
+    <node pkg="line_detector" type="line_detecting.py" name="$(arg detecting_name)">
+        
+    </node>
+
+    <node pkg="line_detector" type="line_follower.py" name="$(arg following_name)">
+        
+    </node>
+
+</launch>
